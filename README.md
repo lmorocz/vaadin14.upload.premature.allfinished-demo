@@ -1,15 +1,15 @@
-#Vaadin 14+ Upload premature AllFinishedEvent demo
+# Vaadin 14+ Upload premature AllFinishedEvent demo
 This is a demonstration project of how Vaadin's Upload component is sometimes sending AllFinishedEvent premature 
 (before all SucceededEventListeners are finished).
 
-##Using
-- Vaadin v14.4.3 and also v18.0.0.beta3
-- Spring-Boot v2.3.6-RELEASE
-- Tomcat 9.0.39 (from Boot's BOM)
-- Chrome v87.0.4280.66 (64-bit)
-- Firefox v83.0 (64-bit)
+## Using
+* Vaadin v14.4.3 and also v18.0.0.beta3
+* Spring-Boot v2.3.6-RELEASE
+* Tomcat 9.0.39 (from Boot's BOM)
+* Chrome v87.0.4280.66 (64-bit)
+* Firefox v83.0 (64-bit)
 
-##Steps to reproduce
+## Steps to reproduce
 1. Build and run with maven, or your favourite IDE as usual. Load up http://localhost:8080/ in a browser.
 2. Hit the "Generate Files"  button to generate some test data with random byte content (20x2.77 MB files in a temp 
 directory)
@@ -83,14 +83,14 @@ Eventually (after 2-3 tries) you will see the AllFinishedEvent log between Succe
 2020-11-24T15:16:05.949229700 Long operation finished for file 'upload_test.016'.
 ```
 
-##Current behaviour
+## Current behaviour
 Sometimes AllFinishedEventListener runs before all SucceededEventListener (with lengthy processing logic) are finished.
 
-##Expected behaviour
+## Expected behaviour
 AllFinishedEventListener only runs after all SucceededEventListener (or other failure/abort/rejected EventListeners)
 are finished.
 
-##Notes
+## Notes
 In the `com.vaadin.flow.component.upload.Upload` constructor the `DomEventListener allFinishedListener` checks whether 
 all `element.files` `uploading` boolean is false. If so it calls `fireAllFinish`. 
 
